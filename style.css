@@ -1,0 +1,584 @@
+:root {
+    --bg-dark: #030712;
+    --bg-secondary: #111827;
+    --bg-card: #1f2937;
+    --text-white: #f9fafb;
+    --text-muted: #d1d5db;
+    --accent: #10b981;
+    --border: #374151;
+}
+
+/* Base Styles */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+    background-color: var(--bg-dark); 
+    color: var(--text-muted); 
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 6rem 0; }
+.bg-alt { background-color: var(--bg-secondary); }
+.text-center { text-align: center; }
+
+/* Navbar */
+.navbar { padding: 1rem 0; position: sticky; top: 0; background: var(--bg-dark); z-index: 100; }
+.nav-flex { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.5rem; font-weight: 700; color: var(--text-white); }
+.nav-links { display: flex; list-style: none; gap: 1rem; align-items: center; }
+.nav-links a { color: var(--text-muted); text-decoration: none; transition: 0.3s; }
+.nav-links a:hover { color: var(--text-white); }
+
+/* Hero Section */
+.hero { display: flex; flex-direction: column-reverse; padding: 4rem 2rem; gap: 3rem; }
+.hero h1 { font-size: 3.5rem; color: var(--text-white); margin-bottom: 1rem; }
+.hero p { font-size: 1.1rem; max-width: 600px; margin-bottom: 2rem; }
+.dot { height: 10px; width: 10px; background: var(--accent); border-radius: 50%; display: inline-block; margin-right: 5px; }
+
+
+
+/* Profile Image with Design Offset */
+.image-box { position: relative; width: 280px; height: 320px; background: var(--bg-card); border: 8px solid var(--bg-dark); z-index: 1; }
+.image-box::before { content: ""; position: absolute; top: 20px; left: 20px; width: 100%; height: 100%; background: var(--bg-card); z-index: -1; }
+.image-box img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Education & Skills Grid */
+.tag-container { text-align: center; margin-bottom: 2rem; }
+.tag { background: var(--bg-card); padding: 4px 15px; border-radius: 20px; font-size: 0.8rem; }
+.edu-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+.edu-card { background: var(--bg-card); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); }
+.accent { color: var(--accent); font-weight: 600; margin: 0.5rem 0; }
+
+.skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; text-align: center; margin-top: 3rem; }
+.skill-item i { font-size: 3rem; margin-bottom: 10px; display: block; }
+
+/* Work Section Zig-Zag */
+.work-list { display: flex; flex-direction: column; gap: 4rem; }
+.work-card { display: flex; flex-direction: column; background: var(--bg-card); border-radius: 15px; overflow: hidden; }
+.work-img { background: var(--bg-secondary); padding: 2rem; flex: 1; }
+.work-img img { width: 100%; border-radius: 10px; }
+.work-info { padding: 3rem; flex: 1; }
+.tech-stack { display: flex; gap: 10px; margin: 1.5rem 0; flex-wrap: wrap; }
+.tech-stack span { background: var(--bg-secondary); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; }
+
+/* Contact */
+.contact-id { font-size: 1.5rem; color: var(--text-white); margin-top: 1rem; }
+.copy-btn { font-size: 1rem; color: var(--text-muted); cursor: pointer; margin-left: 10px; }
+
+
+/* footer */
+.footer p{text-align: center; color: gray; font-style: italic;}
+
+/* ANIMATION-TRANSITIONS */
+/* --- Work Section Animations --- */
+
+/* 1. Initial State for Reveal (Hidden) */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
+}
+
+/* 2. Active State (Shown via JS or simple CSS delay) */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 3. Image Hover Zoom */
+.work-img {
+    overflow: hidden; /* Clips the image when it zooms */
+    position: relative;
+}
+
+.work-img img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.work-card:hover .work-img img {
+    transform: scale(1.08) rotate(1deg); /* Slight tilt and zoom */
+}
+
+/* 4. Content Hover Transition */
+.work-card {
+    transition: var(--transition);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.work-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+    border-color: var(--accent); /* Emerald border on hover */
+}
+
+/* 5. Icon Animation */
+.project-link i {
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+
+.work-card:hover .project-link i {
+    color: var(--text-white);
+    transform: scale(1.2) translateX(3px);
+}
+
+/* Tech Pill Hover */
+.tech-stack span {
+    transition: background 0.3s ease;
+}
+
+.tech-stack span:hover {
+    background: var(--border);
+    color: var(--text-white);
+}
+
+
+/* EDUCATIONS */
+/* --- Education Section Animations --- */
+
+/* 1. Base Card Styling with Transition */
+#education .edu-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+}
+
+/* 2. Scroll Reveal Active State */
+#education .edu-card.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 3. Staggered Delay (Card 2 appears slightly after Card 1) */
+#education .edu-card:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+/* 4. Hover Effects */
+#education .edu-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent); /* Emerald glow from your variables */
+    box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.2);
+    background-color: #262f3f; /* Slightly lighter than var(--bg-card) */
+}
+
+/* 5. Accent Line Animation on Hover */
+#education .edu-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background-color: var(--accent);
+    transition: height 0.3s ease;
+}
+
+#education .edu-card:hover::after {
+    height: 100%;
+}
+
+/* 6. Text Smoothness */
+#education .edu-card h3, 
+#education .edu-card p {
+    transition: color 0.3s ease;
+}
+
+#education .edu-card:hover h3 {
+    color: var(--text-white);
+}
+/* Update your CSS to this if you want it visible immediately without JS */
+#education .edu-card, .work-card {
+    opacity: 1;            /* Change from 0 to 1 */
+    transform: translateY(0); /* Change from 30px to 0 */
+    /* Keep the rest of your transitions for the hover effects */
+}
+
+
+/* --- Navbar Animations & Styling --- */
+
+/* 1. Navbar Entrance */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navbar {
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    /* Glassmorphism Effect */
+    background: rgba(3, 7, 18, 0.8); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+    animation: slideDown 0.8s ease-out forwards;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 2. Logo Styling */
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-white);
+    letter-spacing: 1px;
+    transition: var(--transition);
+}
+
+.logo:hover {
+    color: var(--accent);
+    transform: scale(1.05);
+}
+
+/* 3. Navigation Links */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    position: relative;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--text-white);
+}
+
+/* 4. Animated Underline (Pure CSS) */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* 5. Mobile Optimization */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1.2rem;
+    }
+    .nav-links a {
+        font-size: 0.85rem;
+    }
+}
+
+
+
+/* --- 1. Define the Animations --- */
+
+/* Slide and Fade Up (For Cards) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide in from Left (For Hero Text) */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide in from Right (For Hero Image) */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* --- 2. Apply to Hero Section --- */
+.hero-content {
+    opacity: 0; /* Starts invisible */
+    animation: fadeInLeft 1s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+.hero-image {
+    opacity: 0;
+    animation: fadeInRight 1s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* Make social icons bigger and animated */
+.social-icons i {
+    font-size: 2.5rem; /* Bigger icons */
+    margin-right: 20px;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.social-icons i:hover {
+    color: var(--accent);
+    transform: scale(1.2) translateY(-5px);
+}
+
+/* --- 3. Apply to Education & Work Cards --- */
+.edu-card, .work-card {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Staggered Delays (so they don't all pop at once) */
+.edu-card:nth-child(1) { animation-delay: 0.8s; }
+.edu-card:nth-child(2) { animation-delay: 1.0s; }
+
+.work-card:nth-child(1) { animation-delay: 1.2s; }
+.work-card:nth-child(2) { animation-delay: 1.4s; }
+.work-card:nth-child(3) { animation-delay: 1.6s; }
+.work-card:nth-child(4) { animation-delay: 1.8s; }
+
+/* --- 4. Hover Transitions (Keep these for interactivity) --- */
+.edu-card:hover, .work-card:hover {
+    transform: translateY(-10px) !important; /* !important to override animation end state */
+    border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.image-box img {
+    transition: transform 0.5s ease;
+}
+
+.image-box:hover img {
+    transform: scale(1.05);
+}
+
+/* --- Skills Section Animations --- */
+
+/* 1. Animation for the skill items to pop in */
+@keyframes skillPop {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    70% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 2. Apply animation to items */
+.skill-item {
+    opacity: 0;
+    animation: skillPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* 3. Staggered delays for the 4 skills */
+.skill-item:nth-child(1) { animation-delay: 0.2s; }
+.skill-item:nth-child(2) { animation-delay: 0.4s; }
+.skill-item:nth-child(3) { animation-delay: 0.6s; }
+.skill-item:nth-child(4) { animation-delay: 0.8s; }
+
+/* 4. Hover Effects (Glow and Lift) */
+.skill-item:hover {
+    transform: translateY(-10px) scale(1.1);
+}
+
+/* Specific Glow colors for each technology */
+.skill-item:hover i.text-orange, 
+.skill-item:hover .text-orange { 
+    filter: drop-shadow(0 0 15px rgba(240, 101, 41, 0.6)); 
+}
+
+.skill-item:hover i.text-blue, 
+.skill-item:hover .text-blue { 
+    filter: drop-shadow(0 0 15px rgba(41, 101, 241, 0.6)); 
+}
+
+.skill-item:hover i.text-yellow, 
+.skill-item:hover .text-yellow { 
+    filter: drop-shadow(0 0 15px rgba(247, 223, 30, 0.6)); 
+}
+
+.skill-item:hover svg.text-cyan, 
+.skill-item:hover .text-cyan { 
+    filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.6)); 
+}
+
+/* Styling for the SVG Tailwind icon to match FontAwesome size */
+.skill-item svg {
+    margin-bottom: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Animation for the section description text */
+.section-desc {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 0.1s;
+}
+
+
+
+/* --- 1. THE ANIMATIONS --- */
+
+/* Standard Fade & Slide Up */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide in from Left */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide in from Right */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* --- 2. APPLYING TO SECTIONS --- */
+
+/* Hero: Name and Text slide from left, Image from right */
+.hero-content {
+    opacity: 0;
+    animation: fadeInLeft 1s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+.hero-image {
+    opacity: 0;
+    animation: fadeInRight 1s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+/* Education & Work Cards: Staggered Fade Up */
+.edu-card, .work-card {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Delaying each card so they appear one after another */
+.edu-card:nth-child(1) { animation-delay: 0.8s; }
+.edu-card:nth-child(2) { animation-delay: 1.0s; }
+
+.work-card:nth-child(1) { animation-delay: 1.2s; }
+.work-card:nth-child(2) { animation-delay: 1.4s; }
+.work-card:nth-child(3) { animation-delay: 1.6s; }
+.work-card:nth-child(4) { animation-delay: 1.8s; }
+
+/* Skills: Icons pop in */
+.skill-item {
+    opacity: 0;
+    animation: fadeInUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.skill-item:nth-child(1) { animation-delay: 2.0s; }
+.skill-item:nth-child(2) { animation-delay: 2.1s; }
+.skill-item:nth-child(3) { animation-delay: 2.2s; }
+.skill-item:nth-child(4) { animation-delay: 2.3s; }
+
+/* Contact: Slow Fade in at the end */
+.contact {
+    opacity: 0;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 2.5s;
+}
+
+/* --- 3. INTERACTIVE HOVERS (Pure CSS) --- */
+
+/* Card Lift */
+.edu-card:hover, .work-card:hover {
+    transform: translateY(-12px) !important;
+    border-color: var(--accent);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transition: all 0.4s ease;
+}
+
+/* Social Icons Glow */
+.social-icons i {
+    font-size: 2.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.social-icons i:hover {
+    color: var(--accent);
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* Image Zoom */
+.image-box img { transition: transform 0.6s ease; }
+.image-box:hover img { transform: scale(1.1); }
+
+/* Responsive Media Queries */
+
+@media (min-width: 768px) {
+    .navbar { padding: 1.3rem 0; }
+    .hero { flex-direction: row; align-items: center; justify-content: space-between; }
+    .edu-grid { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: repeat(4, 1fr); }
+    .work-card { flex-direction: row; }
+    .work-card:nth-child(even) { flex-direction: row-reverse; }
+    .nav-links { font-size: 1rem; gap: 2rem;  }
+    .contact-id { font-size: 2.5rem; }
+}
