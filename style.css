@@ -279,6 +279,16 @@ body {
 .nav-links a:hover::after {
     width: 100%;
 }
+.work_card_link_button{
+    padding: 8px 15px;
+    border-radius: 18px;
+    border: var(--border);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+   color: var(--bg-dark);
+   background-color: var(--text-white);
+}
 
 /* 5. Mobile Optimization */
 @media (max-width: 768px) {
